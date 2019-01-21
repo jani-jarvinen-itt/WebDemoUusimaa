@@ -40,10 +40,22 @@ namespace AspNetCoreBackend.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
         public IActionResult OmaJuttu()
         {
             return View();
+        }
+
+        public IActionResult Asiakkaat()
+        {
+            NorthwindContext context = new NorthwindContext();
+
+            string maa = "Finland";
+            List<Customers> asiakkaat = (from c in context.Customers
+                                         where c.Country == maa
+                                         orderby c.CompanyName
+                                         select c).ToList();
+
+            return View(asiakkaat);
         }
     }
 }

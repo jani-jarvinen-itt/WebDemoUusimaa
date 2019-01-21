@@ -45,17 +45,24 @@ namespace AspNetCoreBackend.Controllers
             return View();
         }
 
-        public IActionResult Asiakkaat()
+        public IActionResult Asiakkaat(string id)
         {
             NorthwindContext context = new NorthwindContext();
 
-            string maa = "Finland";
-            List<Customers> asiakkaat = (from c in context.Customers
-                                         where c.Country == maa
-                                         orderby c.CompanyName
-                                         select c).ToList();
+            if (id == null)
+            {
+                return View(context.Customers);
+            }
+            else
+            {
+                string maa = id;
+                List<Customers> asiakkaat = (from c in context.Customers
+                                             where c.Country == maa
+                                             orderby c.CompanyName
+                                             select c).ToList();
 
-            return View(asiakkaat);
+                return View(asiakkaat);
+            }
         }
     }
 }

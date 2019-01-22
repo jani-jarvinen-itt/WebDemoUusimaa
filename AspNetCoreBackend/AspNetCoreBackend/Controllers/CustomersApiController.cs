@@ -49,10 +49,6 @@ namespace AspNetCoreBackend.Controllers
             return customer;
         }
 
-
-
-
-
         // muokkaus
         [HttpPut]
         [Route("{customerid}")]
@@ -81,16 +77,27 @@ namespace AspNetCoreBackend.Controllers
             return null;
         }
 
+        // poisto
+        [HttpDelete]
+        [Route("{customerid}")]
+        public Customers Delete([FromRoute] string customerid)
+        {
+            NorthwindContext context = new NorthwindContext();
 
+            if (customerid != null)
+            {
+                Customers customer = context.Customers.Find(customerid);
 
+                if (customer != null)
+                {
+                    context.Customers.Remove(customer);
+                    context.SaveChanges();
+                }
 
-
-
-
-
-
-
-
+                return customer;
+            }
+            return null;
+        }
 
         [HttpGet]
         [Route("pvm")]

@@ -36,6 +36,62 @@ namespace AspNetCoreBackend.Controllers
             return null;
         }
 
+        // lisäys
+        [HttpPost]
+        [Route("")]
+        public Customers PostCreateNew(Customers customer)
+        {
+            NorthwindContext context = new NorthwindContext();
+
+            context.Customers.Add(customer);
+            context.SaveChanges();
+
+            return customer;
+        }
+
+
+
+
+
+        // muokkaus
+        [HttpPut]
+        [Route("{customerid}")]
+        public Customers PutEdit([FromRoute] string customerid,
+           [FromBody] Customers newData)
+        {
+            NorthwindContext context = new NorthwindContext();
+
+            if (customerid != null)
+            {
+                Customers customer = context.Customers.Find(customerid);
+
+                if (customer != null)
+                {
+                    customer.CompanyName = newData.CompanyName;
+                    customer.ContactName = newData.ContactName;
+                    customer.City = newData.City;
+                    customer.Country = newData.Country;
+                    // ...
+
+                    context.SaveChanges();
+                }
+
+                return customer;
+            }
+            return null;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         [HttpGet]
         [Route("pvm")]
         public string Päivämäärä()

@@ -48,7 +48,7 @@ namespace AspNetCoreBackend.Controllers
         public IActionResult Asiakkaat(string id)
         {
             NorthwindContext context = new NorthwindContext();
-
+            
             if (id == null)
             {
                 return View(context.Customers);

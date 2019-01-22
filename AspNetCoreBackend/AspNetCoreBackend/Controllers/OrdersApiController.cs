@@ -15,9 +15,9 @@ namespace AspNetCoreBackend.Controllers
     {
         private readonly NorthwindContext _context;
 
-        public OrdersApiController(NorthwindContext context)
+        public OrdersApiController()
         {
-            _context = context;
+            _context = new NorthwindContext();
         }
 
         // GET: api/OrdersApi

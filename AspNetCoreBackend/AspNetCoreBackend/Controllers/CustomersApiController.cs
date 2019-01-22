@@ -8,7 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreBackend.Controllers
 {
-    [Route("api/customers")]
+    /// <summary>
+    /// Tämä luokka käsittelee asiakastietoja.
+    /// </summary>
+    [Route("api/v1/customers")]
     [ApiController]
     public class CustomersApiController : ControllerBase
     {
